@@ -1,0 +1,99 @@
+---
+title: 'Keep Healthy, Keep Fit, Keep Happy'
+subtitle: "Daily Report"
+author: "Yufei Sun"
+institute: "Political Science, Tsinghua University"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - zh-CN_custom.css
+      - styles.css
+    mathjax: "https://cdnbootcsscom/mathjax/271/MathJaxjs?config=TeX-MML-AM_HTMLorMML"
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      highlightSpans: true
+      countIncrementalSlides: false
+      ratio: 21:9
+
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+if (!require(pacman)) installpackages("pacman")
+library(pacman)
+p_load(qs,
+       tidyverse)
+set.seed(19970921)
+
+# Data input
+data <- qread("../data/Health_data.qs")
+
+```
+
+## Outline
+
+- Tasks
+
+- Data
+
+---
+class: inverse, center, middle
+
+# Tasks
+
+---
+
+- Drinking Water (/3000cc)
+- Fitness (/1000cal)
+- Sleep (/8h)
+- Complete Apple Watch circles (/3)
+- Apply mask
+- Vitamin c (3), liver protection tablets (1), Hydroxycut (2)
+
+---
+class: inverse, center, middle
+
+# Data
+
+---
+
+# 各项身体指标
+
+```{r eval=require('DT'), tidy=FALSE}
+DT::datatable(
+  data %>% 
+    dplyr::select("日期", "BMI", "体脂", "水分", "内脏脂肪", "肌肉", "蛋白质", "基础代谢", "骨质", "身体年龄"),
+  fillContainer = FALSE, options = list(pageLength = 8)
+)
+```
+
+---
+
+# 行为干预
+
+## 饮食状况
+
+```{r eval=require('DT'), tidy=FALSE}
+DT::datatable(
+  data %>% 
+    dplyr::select("总饮食cal", "早餐饮食cal", "中餐饮食cal", "晚餐饮食cal", "摄入蛋白质", "摄入脂肪", "摄入糖类", "饮水cc"),
+  fillContainer = FALSE, options = list(pageLength = 8)
+)
+```
+
+---
+
+## 行为状况
+
+```{r eval=require('DT'), tidy=FALSE}
+DT::datatable(
+  data %>% 
+    dplyr::select("活动cal", "运动时间mins", "站立h", "睡眠mins", "洗手时间", "心势能", "静止心率", "正念分钟数", "荧幕使用时间iphone", "荧幕使用时间Mac" ),
+  fillContainer = FALSE, options = list(pageLength = 8)
+)
+```
+
